@@ -3,7 +3,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import teamgames.Player;
 public class RunGame {//This class should run the game
-	public static void main (String[] args)
+	public void runRandom ()
 	{
 		SaveLoad newSave = new SaveLoad();
 		boolean continueGame = false;
@@ -29,6 +29,7 @@ public class RunGame {//This class should run the game
 	{
 		if (loadedPlayers.size() == 0)
 		{
+			System.out.println("No existing players found");
 			return;//If no existing players does not print the information
 		}
 		boolean morePlayers = false;
@@ -189,11 +190,13 @@ public class RunGame {//This class should run the game
 		Scanner keyboard = new Scanner(System.in);
 		String playerNum = "1";
 		int playerCT = 0;
+		String existing = "";
 		try {
 			if (loadedPlayers.stream().anyMatch(p -> p.getPlaying().equals(true)) == true)//If any existing players allows no new players
 			{
 				playerNum = "0";
 				playerCT = -1;
+				existing = "This is in addition to any existing players.";
 			}
 		} catch (Exception e)
 		{
@@ -201,7 +204,7 @@ public class RunGame {//This class should run the game
 		}
 		do	{
 			try {
-				System.out.println("Please enter a number of players (" + playerNum + " or more).  This is in addition to any existing players.");
+				System.out.println("Please enter a number of players (" + playerNum + " or more). " + existing);
 				inputString = keyboard.next();
 				input = Integer.parseInt(inputString.trim());//removes excess spaces
 				numCheck = false;
