@@ -289,27 +289,29 @@ public class RunSlots
 		{
 			if (gambler.getSlot(1).equalsIgnoreCase("7"))
 			{
-				gambler.setPayout(70);
+				gambler.setPayout(2);
 				gambler.setPayment();
+				System.out.println("LUCKY 7s! You won the JACKPOT!");
 			}
 			else if (gambler.getSlot(1).equalsIgnoreCase("A"))
 			{
-				gambler.setPayout(8);
+				gambler.setPayout(1.5);
 				gambler.setPayment();
+				System.out.println("You won the alternate prize.");
 			}
 			else if (gambler.getSlot(1).equalsIgnoreCase("ø"))
 			{
-				gambler.setPayout(2);
+				gambler.setPayout(1.15);
 				gambler.setPayment();
 			}
 			else if (gambler.getSlot(1).equalsIgnoreCase("§"))
 			{
-				gambler.setPayout(1.5);
+				gambler.setPayout(1.05);
 				gambler.setPayment();
 			}
 			else
 			{
-				gambler.setPayout(1.1);
+				gambler.setPayout(1.01);
 				gambler.setPayment();
 			}
 		}
@@ -321,6 +323,7 @@ public class RunSlots
 		else
 		{
 			gambler.setPayout(0);
+			System.out.println("You didn't win, try again soon!");
 		}
 		System.out.println("Your payout is: " + gambler.getPayout() + ". Or in terms of dollars: $" + gambler.getPayment() + ".\n");
 	}
