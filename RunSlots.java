@@ -322,16 +322,26 @@ public class RunSlots
 		ArrayList <Player> trophyroom = 
 				(ArrayList<Player>) playerList.stream()
 				.filter(p -> p.getPlaying() == true)  // only keep those who are playing
-				.sorted(Comparator.comparing(Player::getTotGuess)) // sort by total guess count
+				.sorted(Comparator.comparing(Player::getPayout)) // sort by payout
 				.collect(Collectors.toList());
-		trophyroom.get(0).increaseWincount();//increases wincount for the winner
+		if (trophyroom.get(0).getPayout() != 0)
+		{
+			trophyroom.get(0).increaseWincount();//increases wincount for the winner	
+		}
+		for (int x = 0, y = 0; x < trophyroom.size(); x++)
+		{
+			if (trophyroom.get(0).getPayout() == trophyroom.get(1).getPayout())
+			{
+				trophyroom.get(1).increaseWincount();//increases wincount if there is a tie
+			}
+		}
 		return trophyroom;
 	}
 	static void provideResults (ArrayList <Player> playerList)
 	{
-		System.out.println("|––––––––––––––––––––––––––––––––––––––––– Players ––––––––––––––––––––––––––––––––––––––|");
-		System.out.println("| Place | ID  | Name      | Total Guesses | Valid Guesses | Guesses             | Win CT |");
-		System.out.println("|–––––––|–––––|–––––––––––|–––––––––––––––|–––––––––––––––|–––––––––––––––––––––|––––––––|");
+		System.out.println("|––––––––––––––––––––––––––––––––––––––––––– Players ––––––––––––––––––––––––––––––––––––––––|");
+		System.out.println("| Place | ID  | Name      | Slot Reels | Payout |  Win CT | User Wallet | Payment | Borrowed |");
+		System.out.println("|–––––––|–––––|–––––––––––|––––––––––––|––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|");
 		for (int x = 0; x < playerList.size(); x++)
 		{
 			int y = x + 1;
@@ -342,16 +352,16 @@ public class RunSlots
 			System.out.print("| ");
 			System.out.format("%-10s", playerList.get(x).getName());//Prints player names
 			System.out.print("| ");
-			System.out.format("%-14s", playerList.get(x).getTotGuess());//Prints total guesses
-			System.out.print("| ");
-			System.out.format("%-14s", playerList.get(x).getValGuess());//Prints valid guesses
-			System.out.print("|");
-			System.out.format("%-21s", playerList.get(x).getGuessList());//Prints list of guesses
-			System.out.print("| ");
 			System.out.format("%-7s", playerList.get(x).getWinCT());//Prints wincount
+			System.out.print("| ");
+			System.out.format("%-12s", playerList.get(x).getUsrBal());//Prints user ballance
+			System.out.print("| ");
+			System.out.format("%-8s", playerList.get(x).getPayment());//Prints user payment
+			System.out.print("| ");
+			System.out.format("%-9s", playerList.get(x).getposBankBal());//Prints bank balance
 			System.out.println("|");
 		}
-		System.out.println("|–––––––|–––––|–––––––––––|–––––––––––––––|–––––––––––––––|–––––––––––––––––––––|––––––––|");
+		System.out.println("|–––––––|–––––|–––––––––––|––––––––––––|––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|");
 	}
 	static void reset (ArrayList <Player> current)//resets playing value to false so that players can be readded on reply, but does not reset auth value
 	{

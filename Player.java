@@ -160,6 +160,11 @@ public class Player {
 	{
 		return payout;
 	}
+	public void setRandomPayment (double fund)
+	{
+		payment =  payout * fund;
+		adjustBal();
+	}
 	public void setPayment ()
 	{
 		payment =  payout * bet;
@@ -169,7 +174,7 @@ public class Player {
 	{
 		return payment;
 	}
-	public int setID (ArrayList <Player> current)
+	public int setID (ArrayList <Player> current)//used to find lowest unused playerID
 	{
 		int playerID = 0;
 		Collections.sort(
@@ -254,6 +259,7 @@ public class Player {
 		}
 		else
 		{
+			System.out.println("Your wallet is " + userbalance + " you have enough money to bet, withdrawing " + bet + ".");
 			bet = playerbet;
 			userbalance = userbalance - bet;
 			response = true;

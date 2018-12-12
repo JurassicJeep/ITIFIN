@@ -287,6 +287,7 @@ public class RunRandom {//This class should run the game
 	}
 	static ArrayList <Player> generateResults (ArrayList <Player> playerList) //takes and sorts playerList
 	{
+		System.out.println("\nPayments and Results!");
 		ArrayList <Player> trophyroom = 
 				(ArrayList<Player>) playerList.stream()
 				.filter(p -> p.getPlaying() == true)  // only keep those who are playing
@@ -302,29 +303,29 @@ public class RunRandom {//This class should run the game
 		else if (trophyroom.size() == 2)
 		{
 			trophyroom.get(0).setPayout(.75);
-			trophyroom.get(0).setPayment();
+			trophyroom.get(0).setRandomPayment(pile);
 			System.out.println("Player ID: " + trophyroom.get(0).getID() + " Name: "+ trophyroom.get(0).getName() + " your winnings are " + trophyroom.get(0).getPayment());
 			trophyroom.get(1).setPayout(.25);
-			trophyroom.get(1).setPayment();
+			trophyroom.get(1).setRandomPayment(pile);
 			System.out.println("Player ID: " + trophyroom.get(1).getID() + " Name: "+ trophyroom.get(1).getName() + " your winnings are " + trophyroom.get(1).getPayment());
 		}
 		else
 		{
 			trophyroom.get(0).setPayout(.75);
-			trophyroom.get(0).setPayment();
+			trophyroom.get(0).setRandomPayment(pile);
 			System.out.println("Player ID: " + trophyroom.get(0).getID() + " Name: "+ trophyroom.get(0).getName() + " your winnings are " + trophyroom.get(0).getPayment());
 			trophyroom.get(1).setPayout(.20);
-			trophyroom.get(1).setPayment();
+			trophyroom.get(1).setRandomPayment(pile);
 			System.out.println("Player ID: " + trophyroom.get(1).getID() + " Name: "+ trophyroom.get(1).getName() + " your winnings are " + trophyroom.get(1).getPayment());
 			trophyroom.get(2).setPayout(.05);
-			trophyroom.get(2).setPayment();
+			trophyroom.get(2).setRandomPayment(pile);
 			System.out.println("Player ID: " + trophyroom.get(2).getID() + " Name: "+ trophyroom.get(2).getName() + " your winnings are " + trophyroom.get(2).getPayment());
 		}
 		return trophyroom;
 	}
 	static void provideResults (ArrayList <Player> playerList)
 	{
-		System.out.println("|––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– Players –––––––––––––––––––––––––––––––––––––––––––––––––––––––|");
+		System.out.println("\n|––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– Players –––––––––––––––––––––––––––––––––––––––––––––––––––––––|");
 		System.out.println("| Place | ID  | Name      | Total Guesses | Valid Guesses | Guesses             | Win CT | User Wallet | Payment | Borrowed |");
 		System.out.println("|–––––––|–––––|–––––––––––|–––––––––––––––|–––––––––––––––|–––––––––––––––––––––|––––––––|–––––––––––––|–––––––––|––––––––––|");
 		for (int x = 0; x < playerList.size(); x++)
