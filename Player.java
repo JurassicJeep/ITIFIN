@@ -118,9 +118,9 @@ public class Player {
 	public void setPlayingFalse ()
 	{
 		playing = false;
-		guesslist.clear();
 		bet = 0;
 		payout = 0;
+		payment = 0;
 	}
 	public int getGames ()
 	{
@@ -143,6 +143,11 @@ public class Player {
 	{
 		return bankbalance;
 	}
+	public double getposBankBal ()
+	{
+		double posBankBal = Math.abs(bankbalance);
+		return posBankBal;
+	}
 	public void setPayout (double x)
 	{
 		payout = x;
@@ -155,9 +160,13 @@ public class Player {
 	{
 		return payout;
 	}
-	public double getPayment ()
+	public void setPayment ()
 	{
 		payment =  payout * bet;
+		adjustBal();
+	}
+	public double getPayment ()
+	{
 		return payment;
 	}
 	public int setID (ArrayList <Player> current)
@@ -197,6 +206,10 @@ public class Player {
 		playing = true;
 
 	}
+	public double getBet ()
+	{
+		return bet;
+	}
 	public boolean setBet (double playerbet)
 	{
 		boolean response = false;
@@ -220,11 +233,13 @@ public class Player {
 						bet = playerbet;
 						userbalance = userbalance - bet;
 						response = true;
+						return response;
 					}
 					else if (answer.equals("no"))
 					{
 						System.out.println("Ok, you have not borrowed any money, you cannot play the game");
 						response = false;
+						return response;
 					}
 					else
 					{
@@ -241,7 +256,8 @@ public class Player {
 		{
 			bet = playerbet;
 			userbalance = userbalance - bet;
-			response = false;
+			response = true;
+			return response;
 		}
 		return response;
 	}

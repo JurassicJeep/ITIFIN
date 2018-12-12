@@ -3,6 +3,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import teamgames.Player;
 public class RunRandom {//This class should run the game
+	static double pile;
 	public void randomGame (ArrayList<Player> existingPlayers)
 	{
 		SaveLoad newSave = new SaveLoad();
@@ -50,7 +51,7 @@ public class RunRandom {//This class should run the game
 				System.out.print("| ");
 				System.out.format("%-12s", loadedPlayers.get(x).getUsrBal());//Prints user ballance
 				System.out.print("| ");
-				System.out.format("%-9s", loadedPlayers.get(x).getBankBal());//Prints bank balance
+				System.out.format("%-9s", loadedPlayers.get(x).getposBankBal());//Prints bank balance
 				System.out.println("|");
 			}
 			System.out.println("|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|");
@@ -85,13 +86,13 @@ public class RunRandom {//This class should run the game
 							System.out.println("This player has already been selected, choose another.");
 							playerCheck = true;
 						}
-						boolean rightpwd = passwordCheck(input, loadedPlayers);
-						boolean wantbet = loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).setBet(10);
-
+						boolean rightpwd = passwordCheck(input, loadedPlayers);//Checks if password is correct
+						boolean wantbet = loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).setBet(10);//conducts bank withdrawls
 						if (rightpwd == true && wantbet == true)
 						{
 							System.out.println("Player added");
 							loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).setPlayingTrue();//Sets playing value to true for current game
+							pile = pile + loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).getBet();//Adds bet to pool
 							playerCheck = false;
 						}
 					}
@@ -126,6 +127,7 @@ public class RunRandom {//This class should run the game
 						else
 						{
 							System.out.println("You have entered an invalid selection, (" + addPlayers + ") please try again.");
+							validResponse = true;
 						}
 						validResponse = false;
 				} catch (Exception e) {
@@ -165,7 +167,7 @@ public class RunRandom {//This class should run the game
 			Scanner keyboard = new Scanner(System.in);
 			inputpwd = keyboard.next();
 			inputpwd = inputpwd.trim();
-			if (inputpwd.matches("[^a-zA-Z_]"))//RegEx to ensure only letters
+			if (inputpwd.matches("[^a-zA-Z0-9_]"))//RegEx to ensure only letters
 			{
 				System.out.println("You have entered an invalid selection, (" + inputpwd + "), this contains other characters than letters, please try again.");
 				pwdRepeat = true;
@@ -291,13 +293,40 @@ public class RunRandom {//This class should run the game
 				.sorted(Comparator.comparing(Player::getTotGuess)) // sort by total guess count
 				.collect(Collectors.toList());
 		trophyroom.get(0).increaseWincount();//increases wincount for the winner
+		if (trophyroom.size() == 1)
+		{
+			trophyroom.get(0).setPayout(1);
+			trophyroom.get(0).setPayment();
+			System.out.println("Player ID: " + trophyroom.get(0).getID() + " Name: "+ trophyroom.get(0).getName() + " your winnings are " + trophyroom.get(0).getPayment());
+		}
+		else if (trophyroom.size() == 2)
+		{
+			trophyroom.get(0).setPayout(.75);
+			trophyroom.get(0).setPayment();
+			System.out.println("Player ID: " + trophyroom.get(0).getID() + " Name: "+ trophyroom.get(0).getName() + " your winnings are " + trophyroom.get(0).getPayment());
+			trophyroom.get(1).setPayout(.25);
+			trophyroom.get(1).setPayment();
+			System.out.println("Player ID: " + trophyroom.get(1).getID() + " Name: "+ trophyroom.get(1).getName() + " your winnings are " + trophyroom.get(1).getPayment());
+		}
+		else
+		{
+			trophyroom.get(0).setPayout(.75);
+			trophyroom.get(0).setPayment();
+			System.out.println("Player ID: " + trophyroom.get(0).getID() + " Name: "+ trophyroom.get(0).getName() + " your winnings are " + trophyroom.get(0).getPayment());
+			trophyroom.get(1).setPayout(.20);
+			trophyroom.get(1).setPayment();
+			System.out.println("Player ID: " + trophyroom.get(1).getID() + " Name: "+ trophyroom.get(1).getName() + " your winnings are " + trophyroom.get(1).getPayment());
+			trophyroom.get(2).setPayout(.05);
+			trophyroom.get(2).setPayment();
+			System.out.println("Player ID: " + trophyroom.get(2).getID() + " Name: "+ trophyroom.get(2).getName() + " your winnings are " + trophyroom.get(2).getPayment());
+		}
 		return trophyroom;
 	}
 	static void provideResults (ArrayList <Player> playerList)
 	{
-		System.out.println("|––––––––––––––––––––––––––––––––––––––––– Players ––––––––––––––––––––––––––––––––––––––|");
-		System.out.println("| Place | ID  | Name      | Total Guesses | Valid Guesses | Guesses             | Win CT |");
-		System.out.println("|–––––––|–––––|–––––––––––|–––––––––––––––|–––––––––––––––|–––––––––––––––––––––|––––––––|");
+		System.out.println("|––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– Players –––––––––––––––––––––––––––––––––––––––––––––––––––––––|");
+		System.out.println("| Place | ID  | Name      | Total Guesses | Valid Guesses | Guesses             | Win CT | User Wallet | Payment | Borrowed |");
+		System.out.println("|–––––––|–––––|–––––––––––|–––––––––––––––|–––––––––––––––|–––––––––––––––––––––|––––––––|–––––––––––––|–––––––––|––––––––––|");
 		for (int x = 0; x < playerList.size(); x++)
 		{
 			int y = x + 1;
@@ -315,9 +344,15 @@ public class RunRandom {//This class should run the game
 			System.out.format("%-21s", playerList.get(x).getGuessList());//Prints list of guesses
 			System.out.print("| ");
 			System.out.format("%-7s", playerList.get(x).getWinCT());//Prints wincount
+			System.out.print("| ");
+			System.out.format("%-12s", playerList.get(x).getUsrBal());//Prints user ballance
+			System.out.print("| ");
+			System.out.format("%-8s", playerList.get(x).getPayment());//Prints user payment
+			System.out.print("| ");
+			System.out.format("%-9s", playerList.get(x).getposBankBal());//Prints bank balance
 			System.out.println("|");
 		}
-		System.out.println("|–––––––|–––––|–––––––––––|–––––––––––––––|–––––––––––––––|–––––––––––––––––––––|––––––––|");
+		System.out.println("|–––––––|–––––|–––––––––––|–––––––––––––––|–––––––––––––––|–––––––––––––––––––––|––––––––|–––––––––––––|–––––––––|––––––––––|");
 	}
 	static void reset (ArrayList <Player> current)//resets playing value to false so that players can be readded on reply, but does not reset auth value
 	{

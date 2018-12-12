@@ -81,8 +81,8 @@ public class SaveLoad {
 		String playerPwd = loadedData[2];
 		int playerGames = Integer.parseInt(loadedData[3]);
 		int winCounter = Integer.parseInt(loadedData[4]);
-		double usrbal = Integer.parseInt(loadedData[5]);
-		double bnkbal = Integer.parseInt(loadedData[5]);
+		double usrbal = Double.parseDouble(loadedData[5]);
+		double bnkbal = Double.parseDouble(loadedData[6]);
 		return new Player (playerId, playerName, playerPwd, playerGames, winCounter, usrbal, bnkbal);//creates and returns LoadedPlayer based on constructor
 	}
 	static ArrayList <Player> sortLoaded (ArrayList <Player> playerList) //takes and sorts playerList

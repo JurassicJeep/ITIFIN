@@ -54,7 +54,7 @@ public class RunSlots
 				System.out.println("|");
 				System.out.format("%-12d", loadedPlayers.get(x).getUsrBal());//Prints user ballance
 				System.out.println("|");
-				System.out.format("%-9d", loadedPlayers.get(x).getBankBal());//Prints bank balance
+				System.out.format("%-9d", loadedPlayers.get(x).getposBankBal());//Prints bank balance
 				System.out.println("|");
 			}
 			System.out.println("|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|");
@@ -168,7 +168,7 @@ public class RunSlots
 			Scanner keyboard = new Scanner(System.in);
 			inputpwd = keyboard.next();
 			inputpwd = inputpwd.trim();
-			if (inputpwd.matches("[^a-zA-Z_]"))//RegEx to ensure only letters
+			if (inputpwd.matches("[^a-zA-Z0-9_]"))//RegEx to ensure only letters
 			{
 				System.out.println("You have entered an invalid selection, (" + inputpwd + "), this contains other characters than letters, please try again.");
 				pwdRepeat = true;
