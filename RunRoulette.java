@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import teamgames.Player;
 public class RunRoulette {
-	//static double pile;
+	static double pile;
 	public void rouletteGame(ArrayList<Player> existingPlayers) {
 		SaveLoad newSave = new SaveLoad();
 		boolean continueGame = false;
