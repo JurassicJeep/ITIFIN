@@ -596,6 +596,11 @@ public class Player {
 		placedNumber = x;
 
 	}
+	public String getcolornum ()
+	{
+		String colornum = (guesslistRouletteNumber + " " + guesslistRouletteColor);
+		return colornum;
+	}
 	public String getguesslistRouletteNumber()// returns guesslist
 	{
 		return guesslistRouletteNumber;

@@ -69,7 +69,7 @@ public class RunRoulette {
 			int input = 0;
 			do {//Sub do, checks for proper ID input
 				try {
-					System.out.println("\nEnter the ID of an existing player you wish to import or enter none to skip player inport.");
+					System.out.println("\nEnter the ID of an existing player you wish to import or enter none to skip player import.");
 					inputString = keyboard.next();
 					if (inputString.equals("none"))
 					{
@@ -342,12 +342,9 @@ public class RunRoulette {
 	}
 
 	static void provideResults(ArrayList<Player> playerList) {
-		System.out.println(
-				"|–––––––––––––––––––––––––––––––––––––––––––– Players ––––––––––––––––––––––––––––––––––––––––|");
-		System.out.println(
-				"| Place | ID  | Name      | Slot Reels | Payment |  Win CT | User Wallet | Payment | Borrowed |");
-		System.out.println(
-				"|–––––––|–––––|–––––––––––|––––––––––––|–––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|");
+		System.out.println("|–––––––––––––––––––––––––––––––––––––––––––––– Players ––––––––––––––––––––––––––––––––––––––––––|");
+		System.out.println("| Place | ID  | Name      | Roulette Board | Payment |  Win CT | User Wallet | Payment | Borrowed |");
+		System.out.println("|–––––––|–––––|–––––––––––|––––––––––––––––|–––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|");
 		for (int x = 0; x < playerList.size(); x++) {
 			int y = x + 1;
 			System.out.print("| ");
@@ -357,7 +354,7 @@ public class RunRoulette {
 			System.out.print("| ");
 			System.out.format("%-10s", playerList.get(x).getName());// Prints player names
 			System.out.print("| ");
-			System.out.format("%-11s", playerList.get(x).getSlotReel());// Prints player names
+			System.out.format("%-15s", playerList.get(x).getcolornum());// Prints player names
 			System.out.print("| $");
 			System.out.format("%-7s", playerList.get(x).getPayment());// Prints player names
 			System.out.print("| ");
@@ -370,8 +367,7 @@ public class RunRoulette {
 			System.out.format("%-8s", playerList.get(x).getposBankBal());// Prints bank balance
 			System.out.println("|");
 		}
-		System.out.println(
-				"|–––––––|–––––|–––––––––––|––––––––––––|–––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|");
+		System.out.println("|–––––––|–––––|–––––––––––|––––––––––––––––|–––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|");
 	}
 
 	static void reset(ArrayList<Player> current)// resets playing value to false so that players can be readded on

@@ -66,7 +66,7 @@ public class RunRandom {//This class should run the game
 			int input = 0;
 			do {//Sub do, checks for proper ID input
 				try {
-					System.out.println("\nEnter the ID of an existing player you wish to import or enter none to skip player inport.");
+					System.out.println("\nEnter the ID of an existing player you wish to import or enter none to skip player import.");
 					inputString = keyboard.next();
 					if (inputString.equals("none"))
 					{
