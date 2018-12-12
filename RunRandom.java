@@ -118,19 +118,20 @@ public class RunRandom {//This class should run the game
 					addPlayers = keyboard.next();
 					addPlayers = addPlayers.toLowerCase();
 					if (addPlayers.equals("yes"))
-						{
-							morePlayers = true;
-						}
-						else if (addPlayers.equals("no"))
-						{
-							morePlayers = false;
-						}
-						else
-						{
-							System.out.println("You have entered an invalid selection, (" + addPlayers + ") please try again.");
-							validResponse = true;
-						}
+					{
 						validResponse = false;
+						morePlayers = true;
+					}
+					else if (addPlayers.equals("no"))
+					{
+						validResponse = false;
+						morePlayers = false;
+					}
+					else
+					{
+						System.out.println("You have entered an invalid selection, (" + addPlayers + ") please try again.");
+						validResponse = true;
+					}
 				} catch (Exception e) {
 					System.out.println("You have entered an invalid selection, (" + addPlayers + ") please try again.\n");
 					System.out.println(e.getCause());
@@ -230,12 +231,12 @@ public class RunRandom {//This class should run the game
 	}
 	static ArrayList <Player> createPlayers (int playerCount, ArrayList <Player> current)//Creates player objects, playercount is passed to determine number of runs
 	{
-		for (int x = 0; x < playerCount; x++)
+		for (int x = 0, y = current.size(); x < playerCount; x++, y++)
 		{
 			String name = namePlayers(x+1);//Gets player name
 			current.add(new Player(name,current));
-			boolean wantbet = current.get(x).setBet(10);
-			pile = pile + current.get(x).getBet();//Adds bet to pool
+			boolean wantbet = current.get(y).setBet(10);
+			pile = pile + current.get(y).getBet();//Adds bet to pool
 			System.out.println("The pile is now: $" + pile);
 		}
 		for (int x = 0; x < current.size(); x++)
@@ -323,6 +324,14 @@ public class RunRandom {//This class should run the game
 			trophyroom.get(2).setPayout(.05);
 			trophyroom.get(2).setRandomPayment(pile);
 			System.out.println("Player ID: " + trophyroom.get(2).getID() + " Name: "+ trophyroom.get(2).getName() + " your winnings are " + trophyroom.get(2).getPayment());
+			if (trophyroom.size() > 2)
+			{
+				for (int x = 3; x < trophyroom.size(); x++)
+				{
+					System.out.print("Player ID: " + trophyroom.get(x).getID() + " Name: "+ trophyroom.get(x).getName());
+					System.out.println(" you lose. You don't win any money, play again soon!");
+				}
+			}
 		}
 		return trophyroom;
 	}
@@ -377,21 +386,26 @@ public class RunRandom {//This class should run the game
 			playSize = playSize.toLowerCase();
 			if (playSize.equals("yes")||playSize.equals("no"))
 			{
-				boundRepeat = false;
-				break;
+				if (playSize.equals("yes"))
+				{
+					System.out.println("The game will begin again.");
+					playResult = true;
+					return playResult;
+				}
+				else
+				{
+					System.out.println("Thank you for playing!");
+					System.out.println("The game will now save and end.");
+					boundRepeat = false;
+					playResult = false;
+					return playResult;
+				}
 			}
-			System.out.println("You have entered an invalid selection, (" + playSize + ") please try again.");
+			else
+			{
+				System.out.println("You have entered an invalid selection, (" + playSize + ") please try again.");
+			}
 		} while (boundRepeat == true);
-		if (playSize.equals("yes"))
-		{
-			System.out.println("The game will begin again.");
-			playResult = true;
-		}
-		else
-		{
-			System.out.println("Thank you for playing!");
-			System.out.println("The game will now save and end.");
-		}
 		return playResult;
 	}
 }

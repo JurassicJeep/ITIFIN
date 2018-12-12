@@ -35,7 +35,7 @@ public class Player {
 		playing = true;
 		auth = true;
 		games = 1;
-		userbalance = 50;
+		userbalance = 50.0;
 		bankbalance = 0;
 	}
 	public Player (int Id, String name, String pwd, int gamesplayed, int wincounter, double userbal, double bankbal)//Constructor for existing players
@@ -228,7 +228,6 @@ public class Player {
 	}
 	public boolean setBet (double playerbet)
 	{
-		bet = playerbet;
 		boolean response = false;
 		System.out.println("This game requires a bet of: " + playerbet);
 		if (userbalance < playerbet)
@@ -240,7 +239,7 @@ public class Player {
 			do {//sub do ensures valid yes/no input is entered
 				String answer = "";
 				try {
-					System.out.println("Would you like to add another player? (Yes/No)");
+					System.out.println("Would you like to borrow from the bank? (Yes/No)");
 					answer = keyboard.next();
 					answer = answer.toLowerCase();
 					if (answer.equals("yes"))
@@ -271,6 +270,7 @@ public class Player {
 		}
 		else
 		{
+			bet = playerbet;
 			System.out.println("Your wallet is " + userbalance + " you have enough money to bet, withdrawing " + bet + ".");
 			userbalance = userbalance - bet;
 			response = true;

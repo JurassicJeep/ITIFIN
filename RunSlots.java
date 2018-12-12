@@ -231,11 +231,11 @@ public class RunSlots
 	}
 	static ArrayList <Player> createPlayers (int playerCount, ArrayList <Player> current)//Creates player objects, playercount is passed to determine number of runs
 	{
-		for (int x = 0; x < playerCount; x++)
+		for (int x = 0, y = current.size(); x < playerCount; x++, y++)
 		{
 			String name = namePlayers(x+1);//Gets player name
 			current.add(new Player(name,current));
-			boolean wantbet = current.get(x).setBet(10);
+			boolean wantbet = current.get(y).setBet(10);
 		}
 		for (int x = 0; x < current.size(); x++)
 		{
