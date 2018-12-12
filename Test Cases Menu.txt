@@ -1,0 +1,7 @@
+Test Cases Menu
+Enter Roulette (any case)->starts roulette
+Enter Slots (any case)->starts slots
+Enter Random Number (any case)->starts random number game
+Enter scores (any case)->loads existing scores if so present
+Enter info (any case)->provides game information
+Enter invalid entry->prompts for reentry
