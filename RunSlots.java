@@ -235,7 +235,7 @@ public class RunSlots
 		{
 			String name = namePlayers(x+1);//Gets player name
 			current.add(new Player(name,current));
-			//current.get(x).setupRandGame(); old code that was not save prepared
+			boolean wantbet = current.get(x).setBet(10);
 		}
 		for (int x = 0; x < current.size(); x++)
 		{

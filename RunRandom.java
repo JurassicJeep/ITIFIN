@@ -234,7 +234,9 @@ public class RunRandom {//This class should run the game
 		{
 			String name = namePlayers(x+1);//Gets player name
 			current.add(new Player(name,current));
-			//current.get(x).setupRandGame(); old code that was not save prepared
+			boolean wantbet = current.get(x).setBet(10);
+			pile = pile + current.get(x).getBet();//Adds bet to pool
+			System.out.println("The pile is now: $" + pile);
 		}
 		for (int x = 0; x < current.size(); x++)
 		{
@@ -326,7 +328,7 @@ public class RunRandom {//This class should run the game
 	}
 	static void provideResults (ArrayList <Player> playerList)
 	{
-		System.out.println("\n|––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– Players –––––––––––––––––––––––––––––––––––––––––––––––––––––––|");
+		System.out.println("\n|––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– Players –––––––––––––––––––––––––––––––––––––––––––––––––––––|");
 		System.out.println("| Place | ID  | Name      | Total Guesses | Valid Guesses | Guesses             | Win CT | User Wallet | Payment | Borrowed |");
 		System.out.println("|–––––––|–––––|–––––––––––|–––––––––––––––|–––––––––––––––|–––––––––––––––––––––|––––––––|–––––––––––––|–––––––––|––––––––––|");
 		for (int x = 0; x < playerList.size(); x++)
@@ -351,7 +353,7 @@ public class RunRandom {//This class should run the game
 			System.out.print("| $");
 			System.out.format("%-7s", playerList.get(x).getPayment());//Prints user payment
 			System.out.print("| $");
-			System.out.format("%-9s", playerList.get(x).getposBankBal());//Prints bank balance
+			System.out.format("%-8s", playerList.get(x).getposBankBal());//Prints bank balance
 			System.out.println("|");
 		}
 		System.out.println("|–––––––|–––––|–––––––––––|–––––––––––––––|–––––––––––––––|–––––––––––––––––––––|––––––––|–––––––––––––|–––––––––|––––––––––|");

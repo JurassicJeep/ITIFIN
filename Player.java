@@ -191,7 +191,7 @@ public class Player {
 		Collections.sort(
 				current,
 				(player1, player2) -> player2.getID()
-				- player1.getID());
+				- player1.getID());//sets based on descending tbh don't need this because it goes based on size
 		int highestID = current.size();
 		playerID = highestID + 1;
 		return playerID;
@@ -298,7 +298,7 @@ public class Player {
 	}
 	public void setupRandGame ()//Used to generate variables needed for random number game
 	{
-		System.out.println("Player ID: " + id + " Name: " + name);
+		System.out.println("\nPlayer ID: " + id + " Name: " + name);
 		bounds = boundCheck();
 		Boolean boundRepeat = true;
 		do {

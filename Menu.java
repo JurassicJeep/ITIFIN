@@ -12,8 +12,8 @@ public class Menu
 		boolean continueGame = false;
 		start();
 		do {
-			String [] options = {"Random Number", "Slots", "option3"};
-			String game = selectGame(options);
+			String [] options = {"Random Number", "Slots", "Roulette"};
+			String game = selectGame(options, existingPlayers);
 			switch (game)
 			{
 			case "random number":
@@ -22,7 +22,7 @@ public class Menu
 			case "slots":
 				runslot.slotGame(existingPlayers);
 				break;
-			case "option3":
+			case "roulette":
 				runrand.randomGame(existingPlayers);
 				break;
 			}
@@ -32,17 +32,18 @@ public class Menu
 	static void start ()//Displays startup text
 	{
 		System.out.println("Welcome to our game player!");
-		System.out.println("By: Matt Benitez, Naj Junaid, and Justin Thompson.\n");
+		System.out.println("By: Matt Benitez, Naj Junaid, and Justin Thompson.");
 	}
-	public static String selectGame (String[] opts)
+	public static String selectGame (String[] opts, ArrayList<Player> loadedPlayers)
 	{
 		String input = "";
 		String inputString = "";
 		boolean inputCheck = true;//Used to rerun the input until valid values are selected
 		Scanner keyboard = new Scanner(System.in);
 		do	{
-			System.out.println("Please select the game you would like to play!");
+			System.out.println("\nPlease select the game you would like to play!");
 			System.out.println("Your options are: " + opts[0] + ", " + opts[1] + ", " + opts[2]);
+			System.out.println("You may enter 'info' for information on the games, or 'scores' for a list of results.");
 			try
 			{
 				input = keyboard.nextLine();
@@ -54,9 +55,39 @@ public class Menu
 					inputCheck = false;
 					return inputString;
 				}
+				else if (inputString.equalsIgnoreCase("info"))
+				{
+					System.out.println("Random Number is a guessing game to find the number between two bounds before the other players do.");
+					System.out.println("Slots is a game where the players spin a slot wheel and hope for matches in the three reels.");
+					System.out.println("Roulette is a game where players may bet on colors and numbers based on a ball which spins around a wheel.");
+				}
+				else if (inputString.equalsIgnoreCase("scores"))
+				{
+					System.out.println("\n|–––––––––––––––––––––Current Players ––––––––––––––––––––––|");
+					System.out.println("| ID  | Name      | Games | Win CT | User Wallet | Borrowed |");
+					System.out.println("|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|");
+					for (int x = 0; x < loadedPlayers.size(); x++)
+					{
+						System.out.print("| ");
+						System.out.format("%-4d", loadedPlayers.get(x).getID());
+						System.out.print("| ");
+						System.out.format("%-10s", loadedPlayers.get(x).getName());//Prints player names
+						System.out.print("| ");
+						//System.out.print(loadedPlayers.get(x).getPwd() + " | ");//FOR TESTING ONLY
+						System.out.format("%-6s", loadedPlayers.get(x).getGames());
+						System.out.print("| ");
+						System.out.format("%-7s", loadedPlayers.get(x).getWinCT());//Prints wincount
+						System.out.print("| $");
+						System.out.format("%-11s", loadedPlayers.get(x).getUsrBal());//Prints user ballance
+						System.out.print("| $");
+						System.out.format("%-8s", loadedPlayers.get(x).getposBankBal());//Prints bank balance
+						System.out.println("|");
+					}
+					System.out.println("|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|");
+				}
 				else
 				{
-					System.out.println("A valid game was not entered.");
+					System.out.println("A valid game or option was not entered.");
 					System.out.println("You entered " + "'" + input + "'" + "\n");
 					inputCheck = true;
 				}

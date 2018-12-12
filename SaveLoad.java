@@ -89,8 +89,8 @@ public class SaveLoad {
 	{
 		Collections.sort(
 				playerList,
-				(player1, player2) -> player2.getID()
-				- player1.getID());//runs sorting based on ID decending
+				(player1, player2) -> player1.getID()
+				- player2.getID());//runs sorting based on ID ascending
 		return playerList;
 	}
 }
