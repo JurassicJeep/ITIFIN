@@ -90,12 +90,15 @@ public class RunSlots
 							playerCheck = true;
 						}
 						boolean rightpwd = passwordCheck(input, loadedPlayers);
-						boolean wantbet = loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).setBet(5);
-						if (rightpwd == true && wantbet == true)
+						if (rightpwd == true)
 						{
-							System.out.println("Player added");
-							loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).setPlayingTrue();//Sets playing value to true for current game
-							playerCheck = false;
+							boolean wantbet = loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).setBet(5);
+							if (wantbet ==true)
+							{
+								System.out.println("Player added");
+								loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).setPlayingTrue();//Sets playing value to true for current game
+								playerCheck = false;
+							}
 						}
 					}
 				} catch (Exception e) {//if input is invalid catches error and displays text

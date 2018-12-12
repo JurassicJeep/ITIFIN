@@ -168,19 +168,6 @@ public class Player {
 	{
 		return payout;
 	}
-	public void setRandomPayment (double fund)
-	{
-		payment =  payout * fund;
-		adjustBal();
-	}
-	public void setPayment ()
-	{
-		payment =  payout * bet;
-		if (payment > 0)
-		{
-			adjustBal();
-		}
-	}
 	public double getPayment ()
 	{
 		return payment;
@@ -278,22 +265,36 @@ public class Player {
 		}
 		return response;
 	}
+	public void setRandomPayment (double fund)
+	{
+		payment =  payout * fund;
+		adjustBal();
+	}
+	public void setPayment ()
+	{
+		payment =  payout * bet;
+		if (payment > 0)
+		{
+			adjustBal();
+			System.out.println("Adjusting wallet with winnings.");
+		}
+	}
 	public void adjustBal ()
 	{
-		double baltotal = bankbalance + payout;
+		double baltotal = bankbalance + payment;
 		if (bankbalance < 0 && baltotal < 0)
 		{
-			bankbalance = payout + bankbalance;
+			bankbalance = payment + bankbalance;
 		}
 		else if (bankbalance < 0 && baltotal > 0)
 		{
-			double partialbal = payout + bankbalance;
+			double partialbal = payment + bankbalance;
 			bankbalance = 0;
 			userbalance = userbalance + partialbal;
 		}
-		else if (bankbalance > 0)
+		else if (bankbalance >= 0)
 		{
-			userbalance = userbalance + payout;
+			userbalance = userbalance + payment;
 		}
 	}
 	public void setupRandGame ()//Used to generate variables needed for random number game

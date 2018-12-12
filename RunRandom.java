@@ -87,14 +87,18 @@ public class RunRandom {//This class should run the game
 							playerCheck = true;
 						}
 						boolean rightpwd = passwordCheck(input, loadedPlayers);//Checks if password is correct
-						boolean wantbet = loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).setBet(10);//conducts bank withdrawls
-						if (rightpwd == true && wantbet == true)
+						if (rightpwd == true)
 						{
-							System.out.println("Player added");
-							loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).setPlayingTrue();//Sets playing value to true for current game
-							pile = pile + loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).getBet();//Adds bet to pool
-							System.out.println("The pile is now: $" + pile);
-							playerCheck = false;
+							boolean wantbet = loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).setBet(10);//conducts bank withdrawls
+
+							if (wantbet == true)
+							{
+								System.out.println("Player added");
+								loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).setPlayingTrue();//Sets playing value to true for current game
+								pile = pile + loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).getBet();//Adds bet to pool
+								System.out.println("The pile is now: $" + pile);
+								playerCheck = false;	
+							}
 						}
 					}
 				} catch (Exception e) {//if input is invalid catches error and displays text
