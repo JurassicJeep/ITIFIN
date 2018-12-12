@@ -34,6 +34,7 @@ public class RunSlots
 		if (loadedPlayers.size() == 0)
 		{
 			System.out.println("No existing players found");
+			return;
 		}
 		else
 		{

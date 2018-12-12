@@ -1,20 +1,21 @@
 package Runner;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 import teamgames.Player;
-public class RunRandom {//This class should run the game
-	static double pile;
-	public void randomGame (ArrayList<Player> existingPlayers)
-	{
+public class RunRoulette {
+	//static double pile;
+	public void rouletteGame(ArrayList<Player> existingPlayers) {
 		SaveLoad newSave = new SaveLoad();
 		boolean continueGame = false;
 		do {
 			startGame();
 			selectExisting(existingPlayers);
 			int players = countPlayers(existingPlayers);
-			createPlayers(players, existingPlayers); 
+			createPlayers(players, existingPlayers);
 			proceedGame(existingPlayers);
-			ArrayList <Player> results = generateResults(existingPlayers);
+			ArrayList<Player> results = generateResults(existingPlayers);
 			provideResults(results);
 			newSave.runSave(existingPlayers);
 			reset(existingPlayers);
@@ -22,10 +23,12 @@ public class RunRandom {//This class should run the game
 		} while (continueGame == true);
 		return;
 	}
-	static void startGame ()//Displays startup text
+
+	static void startGame()// Displays startup text
 	{
-		System.out.println("Welcome to the Random Number multiplayer guessing-game.\n");
+		System.out.println("Welcome to the Roulette game.\n");
 	}
+
 	static void selectExisting (ArrayList <Player> loadedPlayers)
 	{
 		if (loadedPlayers.size() == 0)
@@ -90,14 +93,14 @@ public class RunRandom {//This class should run the game
 						boolean rightpwd = passwordCheck(input, loadedPlayers);//Checks if password is correct
 						if (rightpwd == true)
 						{
-							boolean wantbet = loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).setBet(10);//conducts bank withdrawls
+							boolean wantbet = loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).setBet(5);//conducts bank withdrawls
 
 							if (wantbet == true)
 							{
 								System.out.println("Player added");
 								loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).setPlayingTrue();//Sets playing value to true for current game
-								pile = pile + loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).getBet();//Adds bet to pool
-								System.out.println("The pile is now: $" + pile);
+								//pile = pile + loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).getBet();//Adds bet to pool
+								//System.out.println("The pile is now: $" + pile);
 								playerCheck = false;	
 							}
 						}
@@ -241,15 +244,15 @@ public class RunRandom {//This class should run the game
 			String name = namePlayers(x+1);//Gets player name
 			current.add(new Player(name,current));
 			boolean wantbet = current.get(y).setBet(10);
-			pile = pile + current.get(y).getBet();//Adds bet to pool
-			System.out.println("The pile is now: $" + pile);
+			//pile = pile + current.get(y).getBet();//Adds bet to pool
+			//System.out.println("The pile is now: $" + pile);
 		}
-		for (int x = 0; x < current.size(); x++)
-		{
-			if (current.get(x).getPlaying() == true)//only for playing players
+		for (int x = 0; x < current.size(); x++) {
+			if (current.get(x).getPlaying() == true)// only for playing players
 			{
-				current.get(x).setupRandGame();//generates game
+				current.get(x).setupRoulette();// generates game
 			}
+
 		}
 		return current;
 	}
@@ -279,138 +282,129 @@ public class RunRandom {//This class should run the game
 		} while (nameRepeat == true);
 		return playername;
 	}
-	static void proceedGame (ArrayList <Player> playerList)//used to play the game, passes player count and player list
+	static void proceedGame(ArrayList<Player> playerList)// used to play the game, passes player count and player list
 	{
-		do {
-			for (int x = 0; x < playerList.size(); x++)
-			{			
-				if (playerList.get(x).getPlaying() == true /*&& playerList.get(x).getCorrect() == false*/)//only for playing players
-				{
-					playerList.get(x).guessNumber();
-				}
+
+		for (int x = 0; x < playerList.size(); x++) {
+			if (playerList.get(x).getPlaying() == true /* && playerList.get(x).getCorrect() == false */)// only for // players
+
+
+			{
+				playerList.get(x).showRoulette();
+				checkRoulette(playerList.get(x));
 			}
-		} while (playerList.stream()//stream of all players
-				.filter(x -> x.getCorrect() != null)//ensures getcorrect is not null
-				.anyMatch(p -> p.getCorrect()//matches all getcorrect values for ANY match
-						.equals(false)) == true);//if any are still not correct (false), game continues
-	}
-	static ArrayList <Player> generateResults (ArrayList <Player> playerList) //takes and sorts playerList
-	{
-		System.out.println("\nPayments and Results!");
-		ArrayList <Player> trophyroom = 
-				(ArrayList<Player>) playerList.stream()
-				.filter(p -> p.getPlaying() == true)  // only keep those who are playing
-				.sorted(Comparator.comparing(Player::getTotGuess)) // sort by total guess count
-				.collect(Collectors.toList());
-		trophyroom.get(0).increaseWincount();//increases wincount for the winner
-		if (trophyroom.size() == 1)
-		{
-			trophyroom.get(0).setPayout(1);
-			trophyroom.get(0).setRandomPayment(pile);
-			System.out.println("Player ID: " + trophyroom.get(0).getID() + " Name: "+ trophyroom.get(0).getName() + " your winnings are " + trophyroom.get(0).getPayment());
 		}
-		else if (trophyroom.size() == 2)
+	}
+
+	static void checkRoulette(Player gambler) {
+		if (gambler.getcolortrue() == true && gambler.getnumtrue() == true)
 		{
-			trophyroom.get(0).setPayout(.75);
-			trophyroom.get(0).setRandomPayment(pile);
-			System.out.println("Player ID: " + trophyroom.get(0).getID() + " Name: "+ trophyroom.get(0).getName() + " your winnings are " + trophyroom.get(0).getPayment());
-			trophyroom.get(1).setPayout(.25);
-			trophyroom.get(1).setRandomPayment(pile);
-			System.out.println("Player ID: " + trophyroom.get(1).getID() + " Name: "+ trophyroom.get(1).getName() + " your winnings are " + trophyroom.get(1).getPayment());
+			gambler.setPayout(4);
+			gambler.setPayment();
+		}
+		else if (gambler.getnumtrue() == true)
+		{
+			gambler.setPayout(1.5);
+			gambler.setPayment();
+		}
+		else if (gambler.getcolortrue() == true)
+		{
+			gambler.setPayout(1.1);
+			gambler.setPayment();
 		}
 		else
 		{
-			trophyroom.get(0).setPayout(.75);
-			trophyroom.get(0).setRandomPayment(pile);
-			System.out.println("Player ID: " + trophyroom.get(0).getID() + " Name: "+ trophyroom.get(0).getName() + " your winnings are " + trophyroom.get(0).getPayment());
-			trophyroom.get(1).setPayout(.20);
-			trophyroom.get(1).setRandomPayment(pile);
-			System.out.println("Player ID: " + trophyroom.get(1).getID() + " Name: "+ trophyroom.get(1).getName() + " your winnings are " + trophyroom.get(1).getPayment());
-			trophyroom.get(2).setPayout(.05);
-			trophyroom.get(2).setRandomPayment(pile);
-			System.out.println("Player ID: " + trophyroom.get(2).getID() + " Name: "+ trophyroom.get(2).getName() + " your winnings are " + trophyroom.get(2).getPayment());
-			if (trophyroom.size() > 2)
-			{
-				for (int x = 3; x < trophyroom.size(); x++)
-				{
-					System.out.print("Player ID: " + trophyroom.get(x).getID() + " Name: "+ trophyroom.get(x).getName());
-					System.out.println(" you lose. You don't win any money, play again soon!");
-				}
+			gambler.setPayout(0);
+			System.out.println("You didn't win, try again soon!");
+		}
+		System.out.println("Your payout is: " + gambler.getPayout() + ". Or in terms of dollars: $" + gambler.getPayment() + ".\n");
+	}
+
+	static ArrayList<Player> generateResults(ArrayList<Player> playerList) // takes and sorts playerList
+	{
+		ArrayList<Player> trophyroom = (ArrayList<Player>) playerList.stream().filter(p -> p.getPlaying() == true) // only
+				// keep
+				// those
+				// who
+				// are
+				// playing
+				.sorted(Comparator.comparing(Player::getPayout)) // sort by payout
+				.collect(Collectors.toList());
+		if (trophyroom.get(0).getPayout() != 0) {
+			trophyroom.get(0).increaseWincount();// increases wincount for the winner
+		}
+		for (int x = 0, y = 0; x < trophyroom.size(); x++) {
+			if (trophyroom.get(0).getPayout() == trophyroom.get(1).getPayout()) {
+				trophyroom.get(1).increaseWincount();// increases wincount if there is a tie
 			}
 		}
 		return trophyroom;
 	}
-	static void provideResults (ArrayList <Player> playerList)
-	{
-		System.out.println("\n|––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– Players –––––––––––––––––––––––––––––––––––––––––––––––––––––|");
-		System.out.println("| Place | ID  | Name      | Total Guesses | Valid Guesses | Guesses             | Win CT | User Wallet | Payment | Borrowed |");
-		System.out.println("|–––––––|–––––|–––––––––––|–––––––––––––––|–––––––––––––––|–––––––––––––––––––––|––––––––|–––––––––––––|–––––––––|––––––––––|");
-		for (int x = 0; x < playerList.size(); x++)
-		{
+
+	static void provideResults(ArrayList<Player> playerList) {
+		System.out.println(
+				"|–––––––––––––––––––––––––––––––––––––––––––– Players ––––––––––––––––––––––––––––––––––––––––|");
+		System.out.println(
+				"| Place | ID  | Name      | Slot Reels | Payment |  Win CT | User Wallet | Payment | Borrowed |");
+		System.out.println(
+				"|–––––––|–––––|–––––––––––|––––––––––––|–––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|");
+		for (int x = 0; x < playerList.size(); x++) {
 			int y = x + 1;
 			System.out.print("| ");
-			System.out.format("%-6d", y);//Prints place
+			System.out.format("%-6d", y);// Prints place
 			System.out.print("| ");
-			System.out.format("%-4d", playerList.get(x).getID());//Prints ID
+			System.out.format("%-4d", playerList.get(x).getID());// Prints ID
 			System.out.print("| ");
-			System.out.format("%-10s", playerList.get(x).getName());//Prints player names
+			System.out.format("%-10s", playerList.get(x).getName());// Prints player names
 			System.out.print("| ");
-			System.out.format("%-14s", playerList.get(x).getTotGuess());//Prints total guesses
-			System.out.print("| ");
-			System.out.format("%-14s", playerList.get(x).getValGuess());//Prints valid guesses
-			System.out.print("|");
-			System.out.format("%-21s", playerList.get(x).getGuessList());//Prints list of guesses
-			System.out.print("| ");
-			System.out.format("%-7s", playerList.get(x).getWinCT());//Prints wincount
+			System.out.format("%-11s", playerList.get(x).getSlotReel());// Prints player names
 			System.out.print("| $");
-			System.out.format("%-11s", playerList.get(x).getUsrBal());//Prints user ballance
+			System.out.format("%-7s", playerList.get(x).getPayment());// Prints player names
+			System.out.print("| ");
+			System.out.format("%-8s", playerList.get(x).getWinCT());// Prints wincount
 			System.out.print("| $");
-			System.out.format("%-7s", playerList.get(x).getPayment());//Prints user payment
+			System.out.format("%-11s", playerList.get(x).getUsrBal());// Prints user ballance
 			System.out.print("| $");
-			System.out.format("%-8s", playerList.get(x).getposBankBal());//Prints bank balance
+			System.out.format("%-7s", playerList.get(x).getPayment());// Prints user payment
+			System.out.print("| $");
+			System.out.format("%-8s", playerList.get(x).getposBankBal());// Prints bank balance
 			System.out.println("|");
 		}
-		System.out.println("|–––––––|–––––|–––––––––––|–––––––––––––––|–––––––––––––––|–––––––––––––––––––––|––––––––|–––––––––––––|–––––––––|––––––––––|");
+		System.out.println(
+				"|–––––––|–––––|–––––––––––|––––––––––––|–––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|");
 	}
-	static void reset (ArrayList <Player> current)//resets playing value to false so that players can be readded on reply, but does not reset auth value
+
+	static void reset(ArrayList<Player> current)// resets playing value to false so that players can be readded on
+	// reply, but does not reset auth value
 	{
-		for (int x = 0; x < current.size(); x++)
-		{
+		for (int x = 0; x < current.size(); x++) {
 			current.get(x).setPlayingFalse();
 		}
 	}
-	static Boolean playCheck ()//Checks for play again
+
+	static Boolean playCheck()// Checks for play again
 	{
-		Boolean playResult = false;//Used to bring the value back to the main
-		Boolean boundRepeat = true;//Used to run the input repeat
+		Boolean playResult = false;// Used to bring the value back to the main
+		Boolean boundRepeat = true;// Used to run the input repeat
 		String playSize = "";
-		do	{
+		do {
 			System.out.println("Would you like to play again? (Yes/No)");
 			Scanner keyboard = new Scanner(System.in);
 			playSize = keyboard.next();
 			playSize = playSize.toLowerCase();
-			if (playSize.equals("yes")||playSize.equals("no"))
-			{
-				if (playSize.equals("yes"))
-				{
-					System.out.println("The game will begin again.");
-					playResult = true;
-					return playResult;
-				}
-				else
-				{
-					System.out.println("Thank you for playing!");
-					System.out.println("The game will now save and end.");
-					boundRepeat = false;
-					playResult = false;
-					return playResult;
-				}
+			if (playSize.equals("yes") || playSize.equals("no")) {
+				boundRepeat = false;
+				break;
 			}
-			else
-			{
-				System.out.println("You have entered an invalid selection, (" + playSize + ") please try again.");
-			}
+			System.out.println("You have entered an invalid selection, (" + playSize + ") please try again.");
 		} while (boundRepeat == true);
+		if (playSize.equals("yes")) {
+			System.out.println("The game will begin again.");
+			playResult = true;
+		} else {
+			System.out.println("Thank you for playing!");
+			System.out.println("The game will now save and end.");
+		}
 		return playResult;
 	}
 }

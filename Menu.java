@@ -9,6 +9,7 @@ public class Menu
 		ArrayList <Player> existingPlayers = newSave.runLoad();
 		RunRandom runrand = new RunRandom();
 		RunSlots runslot = new RunSlots();
+		RunRoulette runrou = new RunRoulette();
 		boolean continueGame = false;
 		start();
 		do {
@@ -23,7 +24,7 @@ public class Menu
 				runslot.slotGame(existingPlayers);
 				break;
 			case "roulette":
-				runrand.randomGame(existingPlayers);
+				runrou.rouletteGame(existingPlayers);
 				break;
 			}
 			continueGame = again();
