@@ -63,27 +63,34 @@ public class Menu
 				}
 				else if (inputString.equalsIgnoreCase("scores"))
 				{
-					System.out.println("\n|–––––––––––––––––––––Current Players ––––––––––––––––––––––|");
-					System.out.println("| ID  | Name      | Games | Win CT | User Wallet | Borrowed |");
-					System.out.println("|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|");
-					for (int x = 0; x < loadedPlayers.size(); x++)
+					if (loadedPlayers.size() == 0)
 					{
-						System.out.print("| ");
-						System.out.format("%-4d", loadedPlayers.get(x).getID());
-						System.out.print("| ");
-						System.out.format("%-10s", loadedPlayers.get(x).getName());//Prints player names
-						System.out.print("| ");
-						//System.out.print(loadedPlayers.get(x).getPwd() + " | ");//FOR TESTING ONLY
-						System.out.format("%-6s", loadedPlayers.get(x).getGames());
-						System.out.print("| ");
-						System.out.format("%-7s", loadedPlayers.get(x).getWinCT());//Prints wincount
-						System.out.print("| $");
-						System.out.format("%-11s", loadedPlayers.get(x).getUsrBal());//Prints user ballance
-						System.out.print("| $");
-						System.out.format("%-8s", loadedPlayers.get(x).getposBankBal());//Prints bank balance
-						System.out.println("|");
+						System.out.println("No existing players found");
 					}
-					System.out.println("|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|");
+					else
+					{
+						System.out.println("|–––––––––––––––––––––Current Players ––––––––––––––––––––––|");
+						System.out.println("| ID  | Name      | Games | Win CT | User Wallet | Borrowed |");
+						System.out.println("|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|");
+						for (int x = 0; x < loadedPlayers.size(); x++)
+						{
+							System.out.print("| ");
+							System.out.format("%-4d", loadedPlayers.get(x).getID());
+							System.out.print("| ");
+							System.out.format("%-10s", loadedPlayers.get(x).getName());//Prints player names
+							System.out.print("| ");
+							//System.out.print(loadedPlayers.get(x).getPwd() + " | ");//FOR TESTING ONLY
+							System.out.format("%-6s", loadedPlayers.get(x).getGames());
+							System.out.print("| ");
+							System.out.format("%-7s", loadedPlayers.get(x).getWinCT());//Prints wincount
+							System.out.print("| $");
+							System.out.format("%-11s", loadedPlayers.get(x).getUsrBal());//Prints user ballance
+							System.out.print("| $");
+							System.out.format("%-8s", loadedPlayers.get(x).getposBankBal());//Prints bank balance
+							System.out.println("|");
+						}
+						System.out.println("|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|");
+					}
 				}
 				else
 				{
