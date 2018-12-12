@@ -1,0 +1,299 @@
+Proof of run - MENU
+
+
+Welcome to our game player!
+By: Matt Benitez, Naj Junaid, and Justin Thompson.
+
+Please select the game you would like to play!
+Your options are: Random Number, Slots, Roulette
+You may enter 'info' for information on the games, or 'scores' for a list of results.
+info
+Random Number is a guessing game to find the number between two bounds before the other players do.
+Slots is a game where the players spin a slot wheel and hope for matches in the three reels.
+Roulette is a game where players may bet on colors and numbers based on a ball which spins around a wheel.
+
+Please select the game you would like to play!
+Your options are: Random Number, Slots, Roulette
+You may enter 'info' for information on the games, or 'scores' for a list of results.
+scores
+|–––––––––––––––––––––Current Players ––––––––––––––––––––––|
+| ID  | Name      | Games | Win CT | User Wallet | Borrowed |
+|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|
+| 1   | Naj       | 1     | 3      | $60.5       | $0.0     |
+| 2   | foo       | 1     | 6      | $55.0       | $0.0     |
+|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|
+
+Please select the game you would like to play!
+Your options are: Random Number, Slots, Roulette
+You may enter 'info' for information on the games, or 'scores' for a list of results.
+
+
+Proof of run Random Number
+
+
+Please select the game you would like to play!
+Your options are: Random Number, Slots, Roulette
+You may enter 'info' for information on the games, or 'scores' for a list of results.
+random number
+Thank you for selecting: random number
+Your game will now begin.
+
+Welcome to the Random Number multiplayer guessing-game.
+
+|–––––––––––––––––––––Current Players ––––––––––––––––––––––|
+| ID  | Name      | Games | Win CT | User Wallet | Borrowed |
+|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|
+| 1   | Naj       | 1     | 3      | $60.5       | $0.0     |
+| 2   | foo       | 1     | 6      | $55.0       | $0.0     |
+|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|
+
+Enter the ID of an existing player you wish to import or enter none to skip player inport.
+1
+Player ID: 1 Name: Naj please enter your passowrd.
+If you have selected the wrong player, please enter three wrong passwords to return to the menu.
+TEST
+Password correct, adding player
+This game requires a bet of: 10.0
+Your wallet is 60.5 you have enough money to bet, withdrawing 10.0.
+Player added
+The pile is now: $10.0
+Would you like to add another player? (Yes/No)
+no
+Please enter a number of players (0 or more). This is in addition to any existing players.
+1
+Player 1 please enter your name:
+bar
+Player ID: 3 Name: bar please enter your password for use in future games.
+foo
+This game requires a bet of: 10.0
+Your wallet is 50.0 you have enough money to bet, withdrawing 10.0.
+The pile is now: $20.0
+
+Player ID: 1 Name: Naj
+Would you like to select an upper and/or lower bound, neither, or both?
+The default is one (1) through ten (10).
+neither
+
+Player ID: 3 Name: bar
+Would you like to select an upper and/or lower bound, neither, or both?
+The default is one (1) through ten (10).
+neither
+-----
+Welcome player: Naj
+Please guess the number, it is between 1 and 10(inclusive).
+5
+You have guessed too low!
+-----
+Welcome player: bar
+Please guess the number, it is between 1 and 10(inclusive).
+5
+You have guessed too high!
+-----
+Player Naj it is your turn!
+Your last guess (5) was too low!
+Please guess the number, it is between 1 and 10(inclusive).
+6
+You have guessed too low!
+-----
+Player bar it is your turn!
+Your last guess (5) was too high!
+Please guess the number, it is between 1 and 10(inclusive).
+6
+You have guessed too high!
+-----
+Player Naj it is your turn!
+Your last guess (6) was too low!
+Please guess the number, it is between 1 and 10(inclusive).
+7
+You have guessed too low!
+-----
+Player bar it is your turn!
+Your last guess (6) was too high!
+Please guess the number, it is between 1 and 10(inclusive).
+4
+You have guessed too high!
+-----
+Player Naj it is your turn!
+Your last guess (7) was too low!
+Please guess the number, it is between 1 and 10(inclusive).
+8
+You have guessed correct, congrats!!
+-----
+Player bar it is your turn!
+Your last guess (4) was too high!
+Please guess the number, it is between 1 and 10(inclusive).
+3
+You have guessed correct, congrats!!
+
+Payments and Results!
+Player ID: 1 Name: Naj your winnings are 15.0
+Player ID: 3 Name: bar your winnings are 5.0
+
+|––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– Players –––––––––––––––––––––––––––––––––––––––––––––––––––––|
+| Place | ID  | Name      | Total Guesses | Valid Guesses | Guesses             | Win CT | User Wallet | Payment | Borrowed |
+|–––––––|–––––|–––––––––––|–––––––––––––––|–––––––––––––––|–––––––––––––––––––––|––––––––|–––––––––––––|–––––––––|––––––––––|
+| 1     | 1   | Naj       | 4             | 4             |[5, 6, 7, 8]         | 4      | $65.5       | $15.0   | $0.0     |
+| 2     | 3   | bar       | 4             | 4             |[5, 6, 4, 3]         | 0      | $45.0       | $5.0    | $0.0     |
+|–––––––|–––––|–––––––––––|–––––––––––––––|–––––––––––––––|–––––––––––––––––––––|––––––––|–––––––––––––|–––––––––|––––––––––|
+Would you like to play again? (Yes/No)
+yes
+The game will begin again.
+Welcome to the Random Number multiplayer guessing-game.
+
+|–––––––––––––––––––––Current Players ––––––––––––––––––––––|
+| ID  | Name      | Games | Win CT | User Wallet | Borrowed |
+|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|
+| 2   | foo       | 1     | 6      | $55.0       | $0.0     |
+| 1   | Naj       | 1     | 4      | $65.5       | $0.0     |
+| 3   | bar       | 1     | 0      | $45.0       | $0.0     |
+|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|
+
+Enter the ID of an existing player you wish to import or enter none to skip player import.
+
+
+Proof of Run Slots
+
+
+Please select the game you would like to play!
+Your options are: Random Number, Slots, Roulette
+You may enter 'info' for information on the games, or 'scores' for a list of results.
+slots
+Thank you for selecting: slots
+Your game will now begin.
+
+Welcome to the Slots game.
+
+|–––––––––––––––––––––Current Players ––––––––––––––––––––––|
+| ID  | Name      | Games | Win CT | User Wallet | Borrowed |
+|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|
+| 1   | Naj       | 1     | 4      | $65.5       | $0.0     |
+| 2   | foo       | 1     | 6      | $55.0       | $0.0     |
+| 3   | bar       | 1     | 0      | $45.0       | $0.0     |
+|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|
+
+Enter the ID of an existing player you wish to import or enter none to skip player import.
+3
+Player ID: 3 Name: bar please enter your passowrd.
+If you have selected the wrong player, please enter three wrong passwords to return to the menu.
+foo
+Password correct, adding player
+This game requires a bet of: 5.0
+Your wallet is 45.0 you have enough money to bet, withdrawing 5.0.
+Player added
+Would you like to add another player? (Yes/No)
+yes
+
+Enter the ID of an existing player you wish to import or enter none to skip player import.
+2
+Player ID: 2 Name: foo please enter your passowrd.
+If you have selected the wrong player, please enter three wrong passwords to return to the menu.
+bar
+Password correct, adding player
+This game requires a bet of: 5.0
+Your wallet is 55.0 you have enough money to bet, withdrawing 5.0.
+Player added
+Would you like to add another player? (Yes/No)
+no
+Please enter a number of players (0 or more). This is in addition to any existing players.
+0
+Spinning the slot machine for foo!
+–––––––––––––––
+| § || § || § |
+–––––––––––––––
+Adjusting wallet with winnings.
+Your payout is: 1.05. Or in terms of dollars: $5.25.
+
+Spinning the slot machine for bar!
+–––––––––––––––
+| 7 || A || 7 |
+–––––––––––––––
+Adjusting wallet with winnings.
+Your payout is: 1.05. Or in terms of dollars: $5.25.
+
+|––––––––––––––––––––––––––––––––––––––– Players –––––––––––––––––––––––––––––––––––|
+| Place | ID  | Name      | Slot Reels |  Win CT | User Wallet | Payment | Borrowed |
+|–––––––|–––––|–––––––––––|––––––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|
+| 1     | 2   | foo       | [§, §, §]  | 7       | $55.25      | $5.25   | $0.0     |
+| 2     | 3   | bar       | [7, A, 7]  | 2       | $45.25      | $5.25   | $0.0     |
+|–––––––|–––––|–––––––––––|––––––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|
+Would you like to play again? (Yes/No)
+no
+Thank you for playing!
+The game will now save and end.
+Would you like to play another game? (Yes/No)
+
+
+Proof of Run Roulette
+
+Please select the game you would like to play!
+Your options are: Random Number, Slots, Roulette
+You may enter 'info' for information on the games, or 'scores' for a list of results.
+roulette
+Thank you for selecting: roulette
+Your game will now begin.
+
+Welcome to the Roulette game.
+
+|–––––––––––––––––––––Current Players ––––––––––––––––––––––|
+| ID  | Name      | Games | Win CT | User Wallet | Borrowed |
+|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|
+| 1   | Naj       | 1     | 4      | $65.5       | $0.0     |
+| 2   | foo       | 1     | 7      | $55.25      | $0.0     |
+| 3   | bar       | 1     | 2      | $45.25      | $0.0     |
+|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|
+
+Enter the ID of an existing player you wish to import or enter none to skip player import.
+2
+This game requires a bet of: 5.0
+Your wallet is 55.25 you have enough money to bet, withdrawing 5.0.
+Player added
+Would you like to add another player? (Yes/No)
+yes
+
+Enter the ID of an existing player you wish to import or enter none to skip player import.
+3
+This game requires a bet of: 5.0
+Your wallet is 45.25 you have enough money to bet, withdrawing 5.0.
+Player added
+Would you like to add another player? (Yes/No)
+no
+Please enter a number of players (0 or more). This is in addition to any existing players.
+0
+Player ID: 2 name: foo, what number (1-32) would you like to bet on?
+1
+Player ID: 2 name: foo, what color would you like to place on (red or black)?
+red
+Player ID: 3 name: bar, what number (1-32) would you like to bet on?
+2
+Player ID: 3 name: bar, what color would you like to place on (red or black)?
+black
+Spinning the ball for foo!
+...and it lands on
+–––––––––––––––
+| Red 24 |
+–––––––––––––––
+Adjusting wallet with winnings.
+Your payout is: 1.1. Or in terms of dollars: $5.5.
+
+Spinning the ball for bar!
+...and it lands on
+–––––––––––––––
+| Red 30 |
+–––––––––––––––
+You didn't win, try again soon!
+Your payout is: 0.0. Or in terms of dollars: $0.0.
+
+|–––––––––––––––––––––––––––––––––––––––––––––– Players ––––––––––––––––––––––––––––––––––––––––––|
+| Place | ID  | Name      | Roulette Board | Payment |  Win CT | User Wallet | Payment | Borrowed |
+|–––––––|–––––|–––––––––––|––––––––––––––––|–––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|
+| 1     | 3   | bar       | 2 black        | $0.0    | 2       | $40.25      | $0.0    | $0.0     |
+| 2     | 2   | foo       | 1 red          | $5.5    | 7       | $55.75      | $5.5    | $0.0     |
+|–––––––|–––––|–––––––––––|––––––––––––––––|–––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|
+Would you like to play again? (Yes/No)
+no
+Thank you for playing!
+The game will now save and end.
+Would you like to play another game? (Yes/No)
+no
+Thank you for playing!
+The games will now save and end.
