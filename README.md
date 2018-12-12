@@ -34,5 +34,12 @@ Then prompts for playing again.
 Saves all players (new and old) into a file for reuse in the user's directory.
 
 ROULETTE
+This game runs against the system, so there is not pool but players can win on a modifier or not win at all.
+Generates roulette color and board (stored in system).
+Asks players for color/number selection (location on a roulette board).
+Compares board to player guesses, if correct gets jackpot payout, if just number correct gets partial payout, if color correct gets negligible payout.
+Highest payout gets a win in the system.
+Then prompts for playing again.
+Saves all players (new and old) into a file for reuse in the user's directory.
 
 A sample save file (save.csv) has been provided, this should be put in the same directory as the game files in order to run, however the game does not need the save file to start, it can start from a blank game.
