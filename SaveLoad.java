@@ -10,7 +10,7 @@ public class SaveLoad {
 		String holder = "";
 		for (int i = 0; i < saveFile.size(); i++)
 		{
-			holder = (saveFile.get(i).getID() + "," + saveFile.get(i).getName() + "," + saveFile.get(i).getPwd() + "," + saveFile.get(i).getGames() + "," + saveFile.get(i).getWinCT());
+			holder = (saveFile.get(i).getID() + "," + saveFile.get(i).getName() + "," + saveFile.get(i).getPwd() + "," + saveFile.get(i).getGames() + "," + saveFile.get(i).getWinCT() + "," + saveFile.get(i).getUsrBal() + "," + saveFile.get(i).getBankBal());
 			saveData.add(holder);
 		}
 		try
@@ -81,7 +81,9 @@ public class SaveLoad {
 		String playerPwd = loadedData[2];
 		int playerGames = Integer.parseInt(loadedData[3]);
 		int winCounter = Integer.parseInt(loadedData[4]);
-		return new Player (playerId, playerName, playerPwd, playerGames, winCounter);//creates and returns LoadedPlayer based on constructor
+		double usrbal = Integer.parseInt(loadedData[5]);
+		double bnkbal = Integer.parseInt(loadedData[5]);
+		return new Player (playerId, playerName, playerPwd, playerGames, winCounter, usrbal, bnkbal);//creates and returns LoadedPlayer based on constructor
 	}
 	static ArrayList <Player> sortLoaded (ArrayList <Player> playerList) //takes and sorts playerList
 	{

@@ -18,6 +18,12 @@ public class Player {
 	private boolean playing;
 	private boolean auth;
 	private int games;
+	private ArrayList<String> slotreels;
+	private double userbalance;
+	private double bankbalance;
+	private double bet;
+	private double payout;
+	private double payment;
 	public Player (String playerName, ArrayList <Player> current)//Constructor for new players
 	{
 		id = setID(current);
@@ -27,14 +33,18 @@ public class Player {
 		playing = true;
 		auth = true;
 		games = 1;
+		userbalance = 50;
+		bankbalance = 0;
 	}
-	public Player (int Id, String name, String pwd, int gamesplayed, int wincounter)//Constructor for existing players
+	public Player (int Id, String name, String pwd, int gamesplayed, int wincounter, double userbal, double bankbal)//Constructor for existing players
 	{
 		this.id = Id;
 		this.name = name;
 		this.password = pwd;
 		this.games = gamesplayed;
 		this.wincount = wincounter;
+		this.userbalance = userbal;
+		this.bankbalance = bankbal;
 		playing = false;
 	}
 	public String getName ()//returns player name
@@ -108,6 +118,9 @@ public class Player {
 	public void setPlayingFalse ()
 	{
 		playing = false;
+		guesslist.clear();
+		bet = 0;
+		payout = 0;
 	}
 	public int getGames ()
 	{
@@ -116,6 +129,36 @@ public class Player {
 	public void playedGame ()
 	{
 		games = games + 1;
+	}
+	public String getSlot (int x)
+	{
+		String slot = slotreels.get(x);
+		return slot;
+	}
+	public double getUsrBal ()
+	{
+		return userbalance;
+	}
+	public double getBankBal ()
+	{
+		return bankbalance;
+	}
+	public void setPayout (double x)
+	{
+		payout = x;
+	}
+	public ArrayList<String> getSlotReel ()
+	{
+		return slotreels;
+	}
+	public double getPayout ()
+	{
+		return payout;
+	}
+	public double getPayment ()
+	{
+		payment =  payout * bet;
+		return payment;
 	}
 	public int setID (ArrayList <Player> current)
 	{
@@ -137,7 +180,7 @@ public class Player {
 			Scanner keyboard = new Scanner(System.in);
 			pwd = keyboard.next();
 			pwd = pwd.trim();
-			if (pwd.matches("[^a-zA-Z_]"))
+			if (pwd.matches("[^a-zA-Z0-9_]"))
 			{
 				System.out.println("You have entered an invalid selection, (" + pwd + "), this contains other characters than letters, please try again.");
 				pwdRepeat = true;
@@ -153,6 +196,72 @@ public class Player {
 	{
 		playing = true;
 
+	}
+	public boolean setBet (double playerbet)
+	{
+		boolean response = false;
+		System.out.println("This game requires a bet of: " + playerbet);
+		if (userbalance < playerbet)
+		{
+			System.out.println("Your wallet is " + userbalance + " this is below the bet value.");
+			System.out.println("Would you like to borrow $50? If you do not borrow money you cannot play");
+			boolean validResponse = false;
+			Scanner keyboard = new Scanner(System.in);
+			do {//sub do ensures valid yes/no input is entered
+				String answer = "";
+				try {
+					System.out.println("Would you like to add another player? (Yes/No)");
+					answer = keyboard.next();
+					answer = answer.toLowerCase();
+					if (answer.equals("yes"))
+					{
+						bankbalance = bankbalance - 50;
+						userbalance = userbalance + 50;
+						bet = playerbet;
+						userbalance = userbalance - bet;
+						response = true;
+					}
+					else if (answer.equals("no"))
+					{
+						System.out.println("Ok, you have not borrowed any money, you cannot play the game");
+						response = false;
+					}
+					else
+					{
+						System.out.println("You have entered an invalid selection, (" + response + ") please try again.");
+					}
+					validResponse = false;
+				} catch (Exception e) {
+					System.out.println("You have entered an invalid selection, (" + response + ") please try again.\n");
+					System.out.println(e.getCause());
+				}
+			} while (validResponse == true);
+		}
+		else
+		{
+			bet = playerbet;
+			userbalance = userbalance - bet;
+			response = false;
+		}
+		return response;
+	}
+	public void adjustBal ()
+	{
+		double baltotal = bankbalance + payout;
+		if (bankbalance < 0 && baltotal < 0)
+		{
+			bankbalance = payout + bankbalance;
+		}
+		else if (bankbalance < 0 && baltotal > 0)
+		{
+			double partialbal = payout + bankbalance;
+			bankbalance = 0;
+			userbalance = userbalance + partialbal;
+		}
+		else if (bankbalance > 0)
+		{
+			userbalance = userbalance + payout;
+		}
 	}
 	public void setupRandGame ()//Used to generate variables needed for random number game
 	{
@@ -184,6 +293,29 @@ public class Player {
 		validguesscount = 0;
 		guesslist = new ArrayList<Integer>();
 		correct = false;
+	}
+	public void setupSlots ()
+	{
+		slotreels = new ArrayList<String>();
+		String[] reels = {"7","§","A","ø"};
+		for (int x = 0; x<3; x++)
+		{
+			int reelpos = randomnumber(0,3);
+			String val = reels[reelpos];
+			slotreels.add(val);
+		}
+	}
+	public void showSlots ()
+	{
+		System.out.println("Spinning the slot machine for " + name + "!");
+		System.out.println("–––––––––––––––");
+		for (int x = 0; x < 3; x++)
+		{
+			System.out.print("| ");
+			System.out.print(slotreels.get(x));
+			System.out.print(" |");
+		}
+		System.out.println("\n–––––––––––––––");
 	}
 	static Boolean[] boundCheck () //Calculates if bounds are selectable
 	{
