@@ -339,9 +339,9 @@ public class RunSlots
 	}
 	static void provideResults (ArrayList <Player> playerList)
 	{
-		System.out.println("|––––––––––––––––––––––––––––––––––––––––––– Players ––––––––––––––––––––––––––––––––––––––––|");
-		System.out.println("| Place | ID  | Name      | Slot Reels | Payout |  Win CT | User Wallet | Payment | Borrowed |");
-		System.out.println("|–––––––|–––––|–––––––––––|––––––––––––|––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|");
+		System.out.println("|–––––––––––––––––––––––––––––––––––––––––––– Players ––––––––––––––––––––––––––––––––––––––––|");
+		System.out.println("| Place | ID  | Name      | Slot Reels | Payment |  Win CT | User Wallet | Payment | Borrowed |");
+		System.out.println("|–––––––|–––––|–––––––––––|––––––––––––|–––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|");
 		for (int x = 0; x < playerList.size(); x++)
 		{
 			int y = x + 1;
@@ -351,17 +351,21 @@ public class RunSlots
 			System.out.format("%-4d", playerList.get(x).getID());//Prints ID
 			System.out.print("| ");
 			System.out.format("%-10s", playerList.get(x).getName());//Prints player names
+			System.out.print("| ");	
+			System.out.format("%-11s", playerList.get(x).getSlotReel());//Prints player names
+			System.out.print("| $");
+			System.out.format("%-7s", playerList.get(x).getPayment());//Prints player names
 			System.out.print("| ");
 			System.out.format("%-7s", playerList.get(x).getWinCT());//Prints wincount
-			System.out.print("| ");
-			System.out.format("%-12s", playerList.get(x).getUsrBal());//Prints user ballance
-			System.out.print("| ");
-			System.out.format("%-8s", playerList.get(x).getPayment());//Prints user payment
-			System.out.print("| ");
-			System.out.format("%-9s", playerList.get(x).getposBankBal());//Prints bank balance
+			System.out.print("| $");
+			System.out.format("%-11s", playerList.get(x).getUsrBal());//Prints user ballance
+			System.out.print("| $");
+			System.out.format("%-7s", playerList.get(x).getPayment());//Prints user payment
+			System.out.print("| $");
+			System.out.format("%-8s", playerList.get(x).getposBankBal());//Prints bank balance
 			System.out.println("|");
 		}
-		System.out.println("|–––––––|–––––|–––––––––––|––––––––––––|––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|");
+		System.out.println("|–––––––|–––––|–––––––––––|––––––––––––|–––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|");
 	}
 	static void reset (ArrayList <Player> current)//resets playing value to false so that players can be readded on reply, but does not reset auth value
 	{

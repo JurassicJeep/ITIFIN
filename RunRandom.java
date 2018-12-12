@@ -48,10 +48,10 @@ public class RunRandom {//This class should run the game
 				System.out.format("%-6s", loadedPlayers.get(x).getGames());
 				System.out.print("| ");
 				System.out.format("%-7s", loadedPlayers.get(x).getWinCT());//Prints wincount
-				System.out.print("| ");
-				System.out.format("%-12s", loadedPlayers.get(x).getUsrBal());//Prints user ballance
-				System.out.print("| ");
-				System.out.format("%-9s", loadedPlayers.get(x).getposBankBal());//Prints bank balance
+				System.out.print("| $");
+				System.out.format("%-11s", loadedPlayers.get(x).getUsrBal());//Prints user ballance
+				System.out.print("| $");
+				System.out.format("%-8s", loadedPlayers.get(x).getposBankBal());//Prints bank balance
 				System.out.println("|");
 			}
 			System.out.println("|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|");
@@ -93,6 +93,7 @@ public class RunRandom {//This class should run the game
 							System.out.println("Player added");
 							loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).setPlayingTrue();//Sets playing value to true for current game
 							pile = pile + loadedPlayers.stream().filter(Player -> checkInput.equals(Player.getID())).findFirst().orElse(null).getBet();//Adds bet to pool
+							System.out.println("The pile is now: $" + pile);
 							playerCheck = false;
 						}
 					}
@@ -345,11 +346,11 @@ public class RunRandom {//This class should run the game
 			System.out.format("%-21s", playerList.get(x).getGuessList());//Prints list of guesses
 			System.out.print("| ");
 			System.out.format("%-7s", playerList.get(x).getWinCT());//Prints wincount
-			System.out.print("| ");
-			System.out.format("%-12s", playerList.get(x).getUsrBal());//Prints user ballance
-			System.out.print("| ");
-			System.out.format("%-8s", playerList.get(x).getPayment());//Prints user payment
-			System.out.print("| ");
+			System.out.print("| $");
+			System.out.format("%-11s", playerList.get(x).getUsrBal());//Prints user ballance
+			System.out.print("| $");
+			System.out.format("%-7s", playerList.get(x).getPayment());//Prints user payment
+			System.out.print("| $");
 			System.out.format("%-9s", playerList.get(x).getposBankBal());//Prints bank balance
 			System.out.println("|");
 		}
