@@ -298,7 +298,7 @@ public class RunRandom {//This class should run the game
 		if (trophyroom.size() == 1)
 		{
 			trophyroom.get(0).setPayout(1);
-			trophyroom.get(0).setPayment();
+			trophyroom.get(0).setRandomPayment(pile);
 			System.out.println("Player ID: " + trophyroom.get(0).getID() + " Name: "+ trophyroom.get(0).getName() + " your winnings are " + trophyroom.get(0).getPayment());
 		}
 		else if (trophyroom.size() == 2)

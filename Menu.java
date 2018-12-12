@@ -12,11 +12,11 @@ public class Menu
 		boolean continueGame = false;
 		start();
 		do {
-			String [] options = {"RandomNum", "Slots", "option3"};
+			String [] options = {"Random Number", "Slots", "option3"};
 			String game = selectGame(options);
 			switch (game)
 			{
-			case "randomnum":
+			case "random number":
 				runrand.randomGame(existingPlayers);
 				break;
 			case "slots":
@@ -38,25 +38,27 @@ public class Menu
 	{
 		String input = "";
 		String inputString = "";
-		boolean inputCheck = false;//Used to rerun the input until valid values are selected
+		boolean inputCheck = true;//Used to rerun the input until valid values are selected
 		Scanner keyboard = new Scanner(System.in);
 		do	{
-			System.out.println("Please select the game you would like to play");
+			System.out.println("Please select the game you would like to play!");
 			System.out.println("Your options are: " + opts[0] + ", " + opts[1] + ", " + opts[2]);
 			try
 			{
-				input = keyboard.next();
+				input = keyboard.nextLine();
 				inputString = input.toLowerCase();
-				inputCheck = false;
-				if (inputString == opts[0].toLowerCase() || inputString == opts[1].toLowerCase() || inputString == opts[2].toLowerCase())
+				if (opts[0].equalsIgnoreCase(inputString) || opts[1].equalsIgnoreCase(inputString) || opts[2].equalsIgnoreCase(inputString))
 				{
-					System.out.println("Thank you for selecting:" + input);
-					System.out.println("Your game will now begin.");
+					System.out.println("Thank you for selecting: " + input);
+					System.out.println("Your game will now begin.\n");
+					inputCheck = false;
+					return inputString;
 				}
 				else
 				{
 					System.out.println("A valid game was not entered.");
 					System.out.println("You entered " + "'" + input + "'" + "\n");
+					inputCheck = true;
 				}
 			}
 			catch (Exception e)

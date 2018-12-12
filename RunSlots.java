@@ -51,10 +51,10 @@ public class RunSlots
 				System.out.format("%-6s", loadedPlayers.get(x).getGames());
 				System.out.print("| ");
 				System.out.format("%-7s", loadedPlayers.get(x).getWinCT());//Prints wincount
-				System.out.println("|");
-				System.out.format("%-12d", loadedPlayers.get(x).getUsrBal());//Prints user ballance
-				System.out.println("|");
-				System.out.format("%-9d", loadedPlayers.get(x).getposBankBal());//Prints bank balance
+				System.out.print("| $");
+				System.out.format("%-11s", loadedPlayers.get(x).getUsrBal());//Prints user ballance
+				System.out.print("| $");
+				System.out.format("%-8s", loadedPlayers.get(x).getposBankBal());//Prints bank balance
 				System.out.println("|");
 			}
 			System.out.println("|–––––|–––––––––––|–––––––|––––––––|–––––––––––––|––––––––––|");
@@ -129,6 +129,7 @@ public class RunSlots
 					else
 					{
 						System.out.println("You have entered an invalid selection, (" + addPlayers + ") please try again.");
+						morePlayers = true;
 					}
 					validResponse = false;
 				} catch (Exception e) {
@@ -289,33 +290,39 @@ public class RunSlots
 			if (gambler.getSlot(1).equalsIgnoreCase("7"))
 			{
 				gambler.setPayout(70);
+				gambler.setPayment();
 			}
 			else if (gambler.getSlot(1).equalsIgnoreCase("A"))
 			{
 				gambler.setPayout(8);
+				gambler.setPayment();
 			}
 			else if (gambler.getSlot(1).equalsIgnoreCase("ø"))
 			{
 				gambler.setPayout(2);
+				gambler.setPayment();
 			}
 			else if (gambler.getSlot(1).equalsIgnoreCase("§"))
 			{
 				gambler.setPayout(1.5);
+				gambler.setPayment();
 			}
 			else
 			{
 				gambler.setPayout(1.1);
+				gambler.setPayment();
 			}
 		}
-		else if (gambler.getSlotReel().stream().distinct().limit(2).count() <= 2)
+		else if (gambler.getSlotReel().stream().distinct().count() == 2)
 		{
 			gambler.setPayout(1.05);
+			gambler.setPayment();
 		}
 		else
 		{
 			gambler.setPayout(0);
 		}
-		System.out.println("Your payout is: " + gambler.getPayout() + ". Or in terms of dollars: " + gambler.getPayment());
+		System.out.println("Your payout is: " + gambler.getPayout() + ". Or in terms of dollars: $" + gambler.getPayment() + ".\n");
 	}
 	static ArrayList <Player> generateResults (ArrayList <Player> playerList) //takes and sorts playerList
 	{
@@ -328,20 +335,23 @@ public class RunSlots
 		{
 			trophyroom.get(0).increaseWincount();//increases wincount for the winner	
 		}
-		for (int x = 0, y = 0; x < trophyroom.size(); x++)
+		if (trophyroom.size() > 1)
 		{
-			if (trophyroom.get(0).getPayout() == trophyroom.get(1).getPayout())
+			for (int x = 0, y = 0; x < trophyroom.size(); x++)
 			{
-				trophyroom.get(1).increaseWincount();//increases wincount if there is a tie
+				if (trophyroom.get(0).getPayout() == trophyroom.get(1).getPayout())
+				{
+					trophyroom.get(1).increaseWincount();//increases wincount if there is a tie
+				}
 			}
 		}
 		return trophyroom;
 	}
 	static void provideResults (ArrayList <Player> playerList)
 	{
-		System.out.println("|–––––––––––––––––––––––––––––––––––––––––––– Players ––––––––––––––––––––––––––––––––––––––––|");
-		System.out.println("| Place | ID  | Name      | Slot Reels | Payment |  Win CT | User Wallet | Payment | Borrowed |");
-		System.out.println("|–––––––|–––––|–––––––––––|––––––––––––|–––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|");
+		System.out.println("|––––––––––––––––––––––––––––––––––––––– Players –––––––––––––––––––––––––––––––––––|");
+		System.out.println("| Place | ID  | Name      | Slot Reels |  Win CT | User Wallet | Payment | Borrowed |");
+		System.out.println("|–––––––|–––––|–––––––––––|––––––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|");
 		for (int x = 0; x < playerList.size(); x++)
 		{
 			int y = x + 1;
@@ -353,10 +363,8 @@ public class RunSlots
 			System.out.format("%-10s", playerList.get(x).getName());//Prints player names
 			System.out.print("| ");	
 			System.out.format("%-11s", playerList.get(x).getSlotReel());//Prints player names
-			System.out.print("| $");
-			System.out.format("%-7s", playerList.get(x).getPayment());//Prints player names
 			System.out.print("| ");
-			System.out.format("%-7s", playerList.get(x).getWinCT());//Prints wincount
+			System.out.format("%-8s", playerList.get(x).getWinCT());//Prints wincount
 			System.out.print("| $");
 			System.out.format("%-11s", playerList.get(x).getUsrBal());//Prints user ballance
 			System.out.print("| $");
@@ -365,7 +373,7 @@ public class RunSlots
 			System.out.format("%-8s", playerList.get(x).getposBankBal());//Prints bank balance
 			System.out.println("|");
 		}
-		System.out.println("|–––––––|–––––|–––––––––––|––––––––––––|–––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|");
+		System.out.println("|–––––––|–––––|–––––––––––|––––––––––––|–––––––––|–––––––––––––|–––––––––|––––––––––|");
 	}
 	static void reset (ArrayList <Player> current)//resets playing value to false so that players can be readded on reply, but does not reset auth value
 	{

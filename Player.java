@@ -1,6 +1,8 @@
 package teamgames;
 import java.util.*;
 import java.lang.Boolean;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 public class Player {
 	protected String name;
 	private String password;
@@ -137,15 +139,21 @@ public class Player {
 	}
 	public double getUsrBal ()
 	{
-		return userbalance;
+		BigDecimal bd = new BigDecimal(userbalance);
+	    bd = bd.setScale(2, RoundingMode.HALF_UP);
+	    return bd.doubleValue();
 	}
 	public double getBankBal ()
 	{
-		return bankbalance;
+		BigDecimal bd = new BigDecimal(bankbalance);
+	    bd = bd.setScale(2, RoundingMode.HALF_UP);
+	    return bd.doubleValue();
 	}
 	public double getposBankBal ()
 	{
-		double posBankBal = Math.abs(bankbalance);
+		BigDecimal bd = new BigDecimal(bankbalance);
+	    bd = bd.setScale(2, RoundingMode.HALF_UP);
+		double posBankBal = Math.abs(bd.doubleValue());
 		return posBankBal;
 	}
 	public void setPayout (double x)
@@ -168,7 +176,10 @@ public class Player {
 	public void setPayment ()
 	{
 		payment =  payout * bet;
-		adjustBal();
+		if (payment > 0)
+		{
+			adjustBal();
+		}
 	}
 	public double getPayment ()
 	{
@@ -217,11 +228,12 @@ public class Player {
 	}
 	public boolean setBet (double playerbet)
 	{
+		bet = playerbet;
 		boolean response = false;
 		System.out.println("This game requires a bet of: " + playerbet);
 		if (userbalance < playerbet)
 		{
-			System.out.println("Your wallet is " + userbalance + " this is below the bet value.");
+			System.out.println("Your wallet is " + userbalance + " this is below the " + bet + "value.");
 			System.out.println("Would you like to borrow $50? If you do not borrow money you cannot play");
 			boolean validResponse = false;
 			Scanner keyboard = new Scanner(System.in);
@@ -260,7 +272,6 @@ public class Player {
 		else
 		{
 			System.out.println("Your wallet is " + userbalance + " you have enough money to bet, withdrawing " + bet + ".");
-			bet = playerbet;
 			userbalance = userbalance - bet;
 			response = true;
 			return response;
